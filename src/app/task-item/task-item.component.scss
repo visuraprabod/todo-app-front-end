@@ -1,0 +1,40 @@
+.task {
+  margin: 15px 0 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid lightgray;
+  padding-top: 10px;
+
+  span {
+    border-radius: 50%;
+    display: inline-flex;
+    position: relative;
+    top: 5px;
+    border: 1px solid lightgray;
+
+
+  }
+
+  &:hover {
+    color: red;
+    cursor: pointer;
+
+    span {
+      svg {
+        visibility: visible;
+      }
+    }
+  }
+}
+
+.completed {
+  text-decoration: line-through;
+  color: green;
+
+  svg {
+    visibility: visible !important;
+  }
+}
+
+.hide {
+  visibility: hidden;
+}

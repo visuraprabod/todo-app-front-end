@@ -1,0 +1,67 @@
+.section{
+  border-bottom: 1px solid lightgray;
+}
+
+#add-task{
+  color: grey;
+  &:hover{
+    color: red;
+    cursor: pointer;
+
+    svg{
+      color: white;
+    }
+
+    span{
+      background-color: red;
+      border-radius: 100%;
+    }
+  }
+
+  span{
+    padding: 2px;
+    margin-right: 10px;
+  }
+
+}
+
+//.task{
+//  margin: 15px 0 15px;
+//  padding-bottom: 15px;
+//  border-bottom: 1px solid lightgray;
+//  padding-top: 10px;
+//
+//  span{
+//    border-radius: 50%;
+//    display: inline-flex;
+//    position: relative;
+//    top: 5px;
+//    border: 1px solid lightgray;
+//
+//    svg{
+//      visibility: hidden;
+//    }
+//  }
+//
+//  &:hover{
+//    color:red;
+//    cursor: pointer;
+//
+//    span{
+//       svg{
+//        visibility: visible;
+//      }
+//    }
+//  }
+//}
+
+//.completed{
+//  text-decoration: line-through;
+//  color: green;
+//
+//  svg{
+//    visibility: visible !important;
+//  }
+//}
+
+
