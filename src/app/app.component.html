@@ -3,12 +3,14 @@
   <ng-container *ngFor="let task of taskService.taskList">
     <app-task-item *ngIf="!task.completed" [task]="task"></app-task-item>
   </ng-container>
+  <br>
   <div id="add-task">
   <span><svg height="13px" width="13px"><path
     d="M6 6V.5a.5.5 0 0 1 1 0V6h5.5a.5.5 0 1 1 0 1H7v5.5a.5.5 0 1 1-1 0V7H.5a.5.5 0 0 1 0-1H6z" fill="currentColor"
     fill-rule="evenodd"></path></svg>
   </span>Add Task
   </div>
+  <br>
 </section>
 <h3 class="section">Completed Tasks</h3>
 <section>
@@ -18,3 +20,8 @@
     </ng-container>
   </ng-container>
 </section>
+
+
+
+
+

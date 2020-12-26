@@ -5,9 +5,63 @@
   {{task.text}}
 </div>-->
 
-<div [class.completed]="task.completed" (click)="task.completed=!task.completed" class="task">
-        <span><svg  [class.hide]="!task.completed" height="24" width="24"><path
-          d="M11.23 13.7l-2.15-2a.55.55 0 0 0-.74-.01l.03-.03a.46.46 0 0 0 0 .68L11.24 15l5.4-5.01a.45.45 0 0 0 0-.68l.02.03a.55.55 0 0 0-.73 0l-4.7 4.35z"
-          fill="currentColor"></path></svg></span>
+<div (click)="task.completed=!task.completed" [class.completed]="task.completed" class="task">
+        <span class="check" [style.backgroundColor]="backgroundColor" [style.border]="borderPriority">
+          <svg [class.hide]="!task.completed" height="24" width="24"><path
+            d="M11.23 13.7l-2.15-2a.55.55 0 0 0-.74-.01l.03-.03a.46.46 0 0 0 0 .68L11.24 15l5.4-5.01a.45.45 0 0 0 0-.68l.02.03a.55.55 0 0 0-.73 0l-4.7 4.35z"
+            fill="currentColor"></path>
+          </svg>
+        </span>
   {{task.text}}
+  <div class="options">
+          <span *ngIf="!task.completed" class="option-item edit" (click)="editTask($event)">
+          <svg height="24" width="24"><g fill="none" fill-rule="evenodd"><path
+            d="M9.5 19h10a.5.5 0 110 1h-10a.5.5 0 110-1z"
+            fill="currentColor"></path><path
+            d="M4.42 16.03a1.5 1.5 0 00-.43.9l-.22 2.02a.5.5 0 00.55.55l2.02-.21a1.5 1.5 0 00.9-.44L18.7 7.4a1.5 1.5 0 000-2.12l-.7-.7a1.5 1.5 0 00-2.13 0L4.42 16.02z"
+            stroke="currentColor"></path></g></svg>
+        </span>
+    <span *ngIf="!task.completed" class="option-item priority">
+          <svg height="24" width="24"><g fill="#808080"><path
+            d="M5 5.5L6 5v14.5a.5.5 0 0 1-.5.5.5.5 0 0 1-.5-.5v-14z"></path><path
+            d="M5 13.51V5.29l.26-.15c.17-.09.46-.21.88-.33 1.62-.47 3.65-.46 6.02.31a11.9 11.9 0 0 0 6.91.15l.21-.06.09-.02.1-.01c.18-.05.18-.05.51.5l.01 8.29-.32.12c-.2.08-.58.2-1.09.31a12.7 12.7 0 0 1-6.74-.33 9.2 9.2 0 0 0-5.43-.3 3.66 3.66 0 0 0-.67.25.5.5 0 0 1-.74-.47.5.5 0 0 1 0-.04zm1.14-.7a10.2 10.2 0 0 1 6.02.31 11.72 11.72 0 0 0 6.83.15V6.32a12.63 12.63 0 0 1-.47.11c-2.08.43-4.34.4-6.68-.36A9.2 9.2 0 0 0 6 5.91v6.94l.14-.04z"></path></g></svg>
+           <div class="priority-container">
+          <ul>
+            <li (click)="changePriority($event)" style="color: #DE4C4A"><svg height="24" width="24"><g fill="#DE4C4A"><path
+              d="M5 5.5L6 5v14.5a.5.5 0 0 1-.5.5.5.5 0 0 1-.5-.5v-14z"></path><path d="M5.5 13.58s2.42-1.32 6.5.02 7.5.03 7.5.03l-.02-7.95c.01-.05-3.4 1.26-7.48-.08s-6.5-.02-6.5-.02v7.93"
+                                                                                    stroke="#DE4C4A"></path></g></svg>Priority 1</li>
+            <li (click)="changePriority($event)" style="color: #F49C18"><svg height="24" width="24"><g fill="#F49C18"><path
+              d="M5 5.5L6 5v14.5a.5.5 0 0 1-.5.5.5.5 0 0 1-.5-.5v-14z"></path><path d="M5.5 13.58s2.42-1.32 6.5.02 7.5.03 7.5.03l-.02-7.95c.01-.05-3.4 1.26-7.48-.08s-6.5-.02-6.5-.02v7.93"
+                                                                                    stroke="#F49C18"></path></g></svg>Priority 2</li>
+            <li (click)="changePriority($event)" style="color: #4073d6"><svg height="24" width="24"><g fill="#4073d6"><path
+              d="M5 5.5L6 5v14.5a.5.5 0 0 1-.5.5.5.5 0 0 1-.5-.5v-14z"></path><path d="M5.5 13.58s2.42-1.32 6.5.02 7.5.03 7.5.03l-.02-7.95c.01-.05-3.4 1.26-7.48-.08s-6.5-.02-6.5-.02v7.93"
+                                                                                    stroke="#4073d6"></path></g></svg>Priority 3</li>
+            <li (click)="changePriority($event)" style="color: #808080 "><svg height="24" width="24"><g fill="#808080"><path
+              d="M5 5.5L6 5v14.5a.5.5 0 0 1-.5.5.5.5 0 0 1-.5-.5v-14z"></path><path
+              d="M5 13.51V5.29l.26-.15c.17-.09.46-.21.88-.33 1.62-.47 3.65-.46 6.02.31a11.9 11.9 0 0 0 6.91.15l.21-.06.09-.02.1-.01c.18-.05.18-.05.51.5l.01 8.29-.32.12c-.2.08-.58.2-1.09.31a12.7 12.7 0 0 1-6.74-.33 9.2 9.2 0 0 0-5.43-.3 3.66 3.66 0 0 0-.67.25.5.5 0 0 1-.74-.47.5.5 0 0 1 0-.04zm1.14-.7a10.2 10.2 0 0 1 6.02.31 11.72 11.72 0 0 0 6.83.15V6.32a12.63 12.63 0 0 1-.47.11c-2.08.43-4.34.4-6.68-.36A9.2 9.2 0 0 0 6 5.91v6.94l.14-.04z"></path></g></svg>Priority 4</li>
+          </ul>
+        </div>
+        </span>
+    <span class="option-item trash" (click)="deleteClick($event)">
+          <svg height="24" width="24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path
+            d="M0 0h24v24H0z"></path><rect fill="currentColor" height="1" rx=".5" width="14" x="5" y="6"></rect><path
+            d="M10 9h1v8h-1V9zm3 0h1v8h-1V9z" fill="currentColor"></path><path d="M17.5 6.5h-11V18A1.5 1.5 0 0 0 8 19.5h8a1.5 1.5 0 0 0 1.5-1.5V6.5zm-9 0h7V5A1.5 1.5 0 0 0 14 3.5h-4A1.5 1.5 0 0 0 8.5 5v1.5z"
+                                                                               stroke="currentColor"></path></g></svg>
+        </span>
+  </div>
 </div>
+
+
+<mat-form-field appearance="fill">
+  <mat-label>Input</mat-label>
+  <input matInput>
+</mat-form-field>
+<!--<div id="nikan">Viusra lkajsdfjh</div>-->
+
+
+
+
+
+
+
+

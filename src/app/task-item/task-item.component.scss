@@ -1,17 +1,16 @@
+//$priority-color: lightgray;
 .task {
   margin: 15px 0 15px;
   padding-bottom: 15px;
   border-bottom: 1px solid lightgray;
   padding-top: 10px;
 
-  span {
+  span.check{
     border-radius: 50%;
     display: inline-flex;
     position: relative;
     top: 5px;
-    border: 1px solid lightgray;
-
-
+    //border: 1px solid $priority-color;
   }
 
   &:hover {
@@ -20,7 +19,7 @@
 
     span {
       svg {
-        visibility: visible;
+        visibility: visible !important;
       }
     }
   }
@@ -36,5 +35,53 @@
 }
 
 .hide {
-  visibility: hidden;
+  visibility: hidden !important;
+}
+
+.edit{
+  flex-basis: auto;
+}
+
+.options{
+  float :right;
+  margin-top: 3px;
+
+  .option-item{
+    padding: 0 5px;
+    display: inline-flex;
+
+    &:hover{
+      background-color: lightgray;
+      border-radius: 20%;
+    }
+  }
+
+  .priority{
+    &:hover{
+      background-color: blue;
+      ul{
+        display: block;
+      }
+    }
+  }
+}
+
+.priority-container{
+  ul{
+    list-style-type: none;
+    margin:0;
+    padding: 0;
+    background-color: white;
+    width: 150px;
+    border: 1px solid black;
+    display: none;
+    li{
+      padding: 10px;
+      &:hover{
+        background-color: lightcyan;
+      }
+    }
+  }
+  position: absolute;
+  right:100px
 }
