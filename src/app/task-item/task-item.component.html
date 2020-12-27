@@ -5,7 +5,7 @@
   {{task.text}}
 </div>-->
 
-<div (click)="task.completed=!task.completed" [class.completed]="task.completed" class="task">
+<div *ngIf="!isExpanded" (click)="task.completed=!task.completed" [class.completed]="task.completed" class="task">
         <span class="check" [style.backgroundColor]="backgroundColor" [style.border]="borderPriority">
           <svg [class.hide]="!task.completed" height="24" width="24"><path
             d="M11.23 13.7l-2.15-2a.55.55 0 0 0-.74-.01l.03-.03a.46.46 0 0 0 0 .68L11.24 15l5.4-5.01a.45.45 0 0 0 0-.68l.02.03a.55.55 0 0 0-.73 0l-4.7 4.35z"
@@ -14,7 +14,7 @@
         </span>
   {{task.text}}
   <div class="options">
-          <span *ngIf="!task.completed" class="option-item edit" (click)="editTask($event)">
+          <span *ngIf="!task.completed" class="option-item edit" (click)="$event.stopPropagation();isExpanded= true;">
           <svg height="24" width="24"><g fill="none" fill-rule="evenodd"><path
             d="M9.5 19h10a.5.5 0 110 1h-10a.5.5 0 110-1z"
             fill="currentColor"></path><path
@@ -42,7 +42,7 @@
           </ul>
         </div>
         </span>
-    <span class="option-item trash" (click)="deleteClick($event)">
+    <span class="option-item trash" (click)="deleteClick($event,task)">
           <svg height="24" width="24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path
             d="M0 0h24v24H0z"></path><rect fill="currentColor" height="1" rx=".5" width="14" x="5" y="6"></rect><path
             d="M10 9h1v8h-1V9zm3 0h1v8h-1V9z" fill="currentColor"></path><path d="M17.5 6.5h-11V18A1.5 1.5 0 0 0 8 19.5h8a1.5 1.5 0 0 0 1.5-1.5V6.5zm-9 0h7V5A1.5 1.5 0 0 0 14 3.5h-4A1.5 1.5 0 0 0 8.5 5v1.5z"
@@ -50,13 +50,15 @@
         </span>
   </div>
 </div>
+<div *ngIf="isExpanded" class="new-task-area">
+  <label class="font-weight-bolder" [style]="'color:blue'" for="inputArea">Edit Task</label><br>
+  <textarea id="inputArea" cols="80" rows="2">{{task.text}}</textarea><br>
+  <div class="btn btn-danger btn-sm" (click)="editTask($event)">Save</div>
+  <div class="btn btn-outline-primary btn-sm" (click)="isExpanded=!isExpanded">Cancel</div>
+</div>
 
 
-<mat-form-field appearance="fill">
-  <mat-label>Input</mat-label>
-  <input matInput>
-</mat-form-field>
-<!--<div id="nikan">Viusra lkajsdfjh</div>-->
+
 
 
 

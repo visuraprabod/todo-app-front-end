@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Task} from '../model/task';
 import {ToastrService} from 'ngx-toastr';
 import {Priority} from '../util/priority.enum';
+import {TaskService} from '../service/task.service';
 
 @Component({
   selector: 'app-task-item',
@@ -13,9 +14,10 @@ export class TaskItemComponent implements OnInit {
   task!: Task;
   borderPriority = '2px solid lightgray';
   backgroundColor = '#f2f2f2';
+  isExpanded = false;
 
 
-  constructor(private toaster: ToastrService) {
+  constructor(private toaster: ToastrService, public taskService: TaskService) {
 
   }
 
@@ -40,14 +42,16 @@ export class TaskItemComponent implements OnInit {
           break;
       }
     } else {
-      this.backgroundColor = 'lightgreen';
+      this.backgroundColor = '#BCF7E2';
       this.borderPriority = '2px solid green';
     }
 
   }
 
-  deleteClick($event: Event): void {
+  deleteClick($event: Event, task: Task): void {
     if (confirm('Are you sure want to delete this task?')) {
+      console.log(this.taskService.taskList.indexOf(task));
+      this.taskService.taskList.splice(this.taskService.taskList.indexOf(task), 1);
       this.toaster.success('Successfully Deleted! ');
     }
     $event.stopImmediatePropagation();
@@ -82,7 +86,16 @@ export class TaskItemComponent implements OnInit {
   }
 
   editTask($event: MouseEvent): void {
-    $event.stopImmediatePropagation();
+    const btn = $event.target as any;
+    const txtArea = btn.parentElement.children[2];
+    if (txtArea.value === '' || txtArea.value.trim().length === 0) {
+      this.toaster.error('Empty task cannot be added! Add a title to the task');
+    } else {
+      this.task.text = txtArea.value;
+      this.isExpanded = false;
+      this.toaster.success('Change task title successfully');
+    }
+    $event.stopPropagation();
 
   }
 }
