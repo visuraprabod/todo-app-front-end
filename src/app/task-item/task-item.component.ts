@@ -48,11 +48,14 @@ export class TaskItemComponent implements OnInit {
 
   }
 
-  deleteClick($event: Event, task: Task): void {
+  async deleteClick($event: Event, task: Task): Promise<void> {
     if (confirm('Are you sure want to delete this task?')) {
-      console.log(this.taskService.taskList.indexOf(task));
-      this.taskService.taskList.splice(this.taskService.taskList.indexOf(task), 1);
-      this.toaster.success('Successfully Deleted! ');
+      // console.log(this.taskService.taskList.indexOf(task));
+      await this.taskService.deleteTask(task).then(() => {
+        this.toaster.success('Successfully Deleted! ');
+      }).catch(() => {
+        this.toaster.warning('Delete Failed! Something went wrong');
+      });
     }
     $event.stopImmediatePropagation();
   }
