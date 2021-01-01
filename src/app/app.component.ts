@@ -3,6 +3,7 @@ import {TaskService} from './service/task.service';
 import {ToastrService} from 'ngx-toastr';
 import {Task} from './model/task';
 import {Priority} from './util/priority.enum';
+import {LoginService} from './service/login.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent {
   isExpanded: any;
   textAreaTxt: any;
 
-  constructor(public taskService: TaskService, private toaster: ToastrService) {
+  constructor(public taskService: TaskService, private toaster: ToastrService, public loginService: LoginService) {
 
   }
 

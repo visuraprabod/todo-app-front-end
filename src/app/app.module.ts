@@ -1,24 +1,30 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {TaskService} from './service/task.service';
-import { TaskItemComponent } from './task-item/task-item.component';
+import {TaskItemComponent} from './task-item/task-item.component';
 import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {LoginComponent} from './login/login.component';
+import {HeaderComponent} from './header/header.component';
+import {LoginService} from './service/login.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    TaskItemComponent
+    TaskItemComponent,
+    LoginComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [TaskService],
+  providers: [TaskService, LoginService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

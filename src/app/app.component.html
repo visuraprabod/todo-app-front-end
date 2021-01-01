@@ -1,32 +1,38 @@
-<h1>To-do List</h1>
-<section>
-  <ng-container *ngFor="let task of taskService.taskList">
-    <app-task-item *ngIf="!task.completed" [task]="task"></app-task-item>
-  </ng-container>
-  <br>
-  <div *ngIf="!isExpanded" id="add-task" (click)="isExpanded=!isExpanded">
+<app-header></app-header>
+<app-login></app-login>
+
+<div style="margin-left: 50px; margin-right: 20px; margin-top:10px" *ngIf="loginService.login">
+  <h1>To-do List</h1>
+  <section>
+    <ng-container *ngFor="let task of taskService.taskList">
+      <app-task-item *ngIf="!task.completed" [task]="task"></app-task-item>
+    </ng-container>
+    <br>
+    <div *ngIf="!isExpanded" id="add-task" (click)="isExpanded=!isExpanded">
   <span><svg height="13px" width="13px"><path
     d="M6 6V.5a.5.5 0 0 1 1 0V6h5.5a.5.5 0 1 1 0 1H7v5.5a.5.5 0 1 1-1 0V7H.5a.5.5 0 0 1 0-1H6z" fill="currentColor"
     fill-rule="evenodd"></path></svg>
   </span>Add Task
-  </div>
+    </div>
 
-  <div *ngIf="isExpanded" class="new-task-area">
-    <label class="font-weight-bolder" [style]="'color:blue'" for="inputArea">Add New Task</label><br>
-    <textarea id="inputArea" cols="80" rows="2"></textarea><br>
-    <div class="btn btn-danger btn-sm" (click)="addNewTask($event)">Add</div>
-    <div class="btn btn-outline-primary btn-sm" (click)="isExpanded=!isExpanded">Cancel</div>
-  </div>
-  <br>
-</section>
-<h3 class="section">Completed Tasks</h3>
-<section>
-  <ng-container *ngFor="let task of taskService.taskList">
-    <ng-container>
-      <app-task-item *ngIf="task.completed" [task]="task"></app-task-item>
+    <div *ngIf="isExpanded" class="new-task-area">
+      <label class="font-weight-bolder" [style]="'color:blue'" for="inputArea">Add New Task</label><br>
+      <textarea id="inputArea" cols="80" rows="2"></textarea><br>
+      <div class="btn btn-danger btn-sm" (click)="addNewTask($event)">Add</div>
+      <div class="btn btn-outline-primary btn-sm" (click)="isExpanded=!isExpanded">Cancel</div>
+    </div>
+    <br>
+  </section>
+  <h3 class="section">Completed Tasks</h3>
+  <section>
+    <ng-container *ngFor="let task of taskService.taskList">
+      <ng-container>
+        <app-task-item *ngIf="task.completed" [task]="task"></app-task-item>
+      </ng-container>
     </ng-container>
-  </ng-container>
-</section>
+  </section>
+</div>
+
 
 
 
