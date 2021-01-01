@@ -17,7 +17,7 @@ export class TaskService {
     this.taskList.push(new Task('T006', 'Deploy the App', false, Priority.PRIORITY4));
   }
 
-  async deleteTask(task: Task): Promise<boolean> {
+  async deleteTask(task: Task): Promise<void> {
     return new Promise((resolve, reject) => {
       const http = new XMLHttpRequest();
       http.onreadystatechange = () => {
@@ -32,9 +32,10 @@ export class TaskService {
       };
       http.open('DELETE', `http://localhost:8080/todoist/tasks?id=${task.id}`, true);
       http.send();
-
     });
-
   }
+
+  // async editTask(task: Task): Promise<boolean>
+
 
 }
