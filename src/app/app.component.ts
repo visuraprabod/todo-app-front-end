@@ -23,7 +23,7 @@ export class AppComponent {
     if (txtArea.value === '') {
       this.toaster.error('Empty task cannot be added! Add a title to the task');
     } else {
-      this.taskService.taskList.push(new Task(txtArea.value, false, Priority.PRIORITY4));
+      this.taskService.taskList.push(new Task('', txtArea.value, false, Priority.PRIORITY4));
       this.toaster.success('New Task added Successfully');
       txtArea.value = '';
       this.isExpanded = false;
