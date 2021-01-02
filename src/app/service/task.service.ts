@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Task} from '../model/task';
 import {Priority} from '../util/priority.enum';
+import {LoginService} from './login.service';
 
 @Injectable()
 
@@ -8,7 +9,7 @@ export class TaskService {
 
   taskList: Array<Task> = [];
 
-  constructor() {
+  constructor(public loginService: LoginService) {
     this.taskList.push(new Task('T001', 'Requirement Elicitation', true, Priority.PRIORITY1));
     this.taskList.push(new Task('T002', 'Design UI', true, Priority.PRIORITY1));
     this.taskList.push(new Task('T003', 'Develop the Code', false, Priority.PRIORITY2));
@@ -33,6 +34,26 @@ export class TaskService {
       http.open('DELETE', `http://localhost:8080/todoist/tasks?id=${task.id}`, true);
       http.send();
     });
+  }
+
+
+  async getAllTasks(): Promise<void> {
+    return new Promise(((resolve, reject) => {
+      const http = new XMLHttpRequest();
+      http.onreadystatechange = () => {
+        if (http.readyState === 4) {
+          if (http.status === 200) {
+            this.taskList = JSON.parse(http.responseText);
+            resolve();
+          }else{
+            reject();
+          }
+        }
+      };
+
+      http.open('GET', `http://localhost:8080/todoist/tasks?uid=${this.loginService.userId}`, true);
+      http.send();
+    }));
   }
 
   // async editTask(task: Task): Promise<boolean>

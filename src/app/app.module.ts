@@ -9,6 +9,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LoginComponent} from './login/login.component';
 import {HeaderComponent} from './header/header.component';
 import {LoginService} from './service/login.service';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {LoginService} from './service/login.service';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    FormsModule,
   ],
   providers: [TaskService, LoginService],
   bootstrap: [AppComponent]

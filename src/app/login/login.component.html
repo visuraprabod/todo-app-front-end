@@ -1,5 +1,50 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>-->
 
+<div class="card" style="width: 50%;margin: 20px auto auto;">
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a aria-controls="nav-login" aria-selected="true" class="nav-link active" data-bs-toggle="tab" href="#nav-login"
+         id="nav-home-tab" role="tab">Login</a>
+      <a aria-controls="nav-sign-up" aria-selected="false" class="nav-link" data-bs-toggle="tab" href="#nav-sign-up"
+         id="nav-profile-tab" role="tab">Sign Up</a>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div aria-labelledby="nav-home-tab" class="tab-pane fade show active" id="nav-login" role="tabpanel">
+      <div style="margin-right:10px; margin-left: 10px" class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input [(ngModel)]="email" aria-describedby="emailHelp" class="form-control" id="exampleInputEmail1" type="email">
+      </div>
+      <div style="margin-right:10px; margin-left: 10px"  class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input [(ngModel)]="password" class="form-control" id="exampleInputPassword1" type="password">
+      </div>
+      <br>
+      <div style="margin-left: 10px" (click)="login()" class="btn btn-primary" type="submit">Submit</div>
+      <br>
+      <br>
+      <br>
+    </div>
+    <div aria-labelledby="nav-profile-tab" class="tab-pane fade" id="nav-sign-up" role="tabpanel">
+      <div class="main-wrp-for-sign-up">
+        <input [(ngModel)]="userEmail" class="form-control" placeholder="Enter an Email here" type="email">
+        <br>
+        <input [(ngModel)]="userName" class="form-control" placeholder="Enter a Username" type="text">
+        <br>
+        <input [(ngModel)]="userPassword" class="form-control" placeholder="Password here" type="password">
+        <br>
+        <input [(ngModel)]="userRetypePassword" class="form-control" placeholder="Retype password here" type="password">
+        <br>
+        <p style="text-align: right">
+          <button (click)="signUp()" class="btn btn-primary">Sign up</button>
+        </p>
+        <small class="form-text text-muted" id="emailHelp">We'll never share your Email with anyone else.</small>
 
+      </div>
+
+    </div>
+
+  </div>
+</div>
 
