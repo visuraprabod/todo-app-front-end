@@ -31,7 +31,7 @@ export class TaskService {
           }
         }
       };
-      http.open('DELETE', `http://localhost:8080/todoist/tasks?id=${task.id}`, true);
+      http.open('DELETE', `http://localhost:8080/todoist/tasks?id=${task.id}&uid=${this.loginService.userId}`, true);
       http.send();
     });
   }
@@ -45,7 +45,7 @@ export class TaskService {
           if (http.status === 200) {
             this.taskList = JSON.parse(http.responseText);
             resolve();
-          }else{
+          } else {
             reject();
           }
         }
@@ -53,6 +53,26 @@ export class TaskService {
 
       http.open('GET', `http://localhost:8080/todoist/tasks?uid=${this.loginService.userId}`, true);
       http.send();
+    }));
+  }
+
+  async addTask(text: string): Promise<string> {
+    return new Promise(((resolve, reject) => {
+      const http = new XMLHttpRequest();
+      http.onreadystatechange = () => {
+        if (http.readyState === 4) {
+          if (http.status === 201) {
+            const id = http.responseText;
+            resolve(id);
+          }
+        }
+      };
+
+      http.open('POST', `http://localhost:8080/todoist/tasks?uid=${this.loginService.userId}`, true);
+      http.setRequestHeader('Content-Type', 'application/json');
+      http.send(JSON.stringify(new Task('', text, false, Priority.PRIORITY4)));
+
+
     }));
   }
 
