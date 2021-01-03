@@ -60,32 +60,39 @@ export class TaskItemComponent implements OnInit {
     $event.stopImmediatePropagation();
   }
 
-  changePriority($event: MouseEvent): void {
-    this.toaster.show('Priority Change Succeful');
+  async changePriority($event: MouseEvent): Promise<void> {
+    $event.stopImmediatePropagation();
+    let tempPriority: Priority = this.task.priority;
     const li = $event.target as any;
     switch (li.innerText) {
       case 'Priority 1':
         this.borderPriority = '2px solid red';
-        this.task.priority = Priority.PRIORITY1;
+        tempPriority = Priority.PRIORITY1;
         this.backgroundColor = 'pink';
         break;
       case 'Priority 2':
         this.borderPriority = '2px solid yellow';
-        this.task.priority = Priority.PRIORITY2;
+        tempPriority = Priority.PRIORITY2;
         this.backgroundColor = 'lightyellow';
         break;
       case 'Priority 3':
         this.borderPriority = '2px solid blue';
-        this.task.priority = Priority.PRIORITY3;
+        tempPriority = Priority.PRIORITY3;
         this.backgroundColor = 'lightblue';
         break;
       case 'Priority 4':
         this.borderPriority = '2px solid lightgray';
-        this.task.priority = Priority.PRIORITY4;
+        tempPriority = Priority.PRIORITY4;
         this.backgroundColor = '#f3f3f3';
         break;
     }
-    $event.stopImmediatePropagation();
+    await this.taskService.updateTask(new Task(this.task.id, this.task.text, this.task.completed, tempPriority)).then(() => {
+      this.task.priority = tempPriority;
+      this.toaster.show('Priority Change Successful');
+    }).catch(() => {
+      this.toaster.error('Something went wrong');
+    });
+
   }
 
   async editTask($event: MouseEvent): Promise<void> {
@@ -104,6 +111,17 @@ export class TaskItemComponent implements OnInit {
 
     }
     $event.stopPropagation();
+
+  }
+
+  async changeCompleted(): Promise<void> {
+    const b = !this.task.completed;
+    await this.taskService.updateTask(new Task(this.task.id, this.task.text, b, this.task.priority)).then(() => {
+      this.task.completed = !this.task.completed;
+    }).catch(() => {
+      this.toaster.error('Something went wrong');
+    });
+
 
   }
 }
