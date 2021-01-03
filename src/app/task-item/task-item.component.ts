@@ -88,15 +88,20 @@ export class TaskItemComponent implements OnInit {
     $event.stopImmediatePropagation();
   }
 
-  editTask($event: MouseEvent): void {
+  async editTask($event: MouseEvent): Promise<void> {
     const btn = $event.target as any;
     const txtArea = btn.parentElement.children[2];
     if (txtArea.value === '' || txtArea.value.trim().length === 0) {
       this.toaster.error('Empty task cannot be added! Add a title to the task');
     } else {
-      this.task.text = txtArea.value;
-      this.isExpanded = false;
-      this.toaster.success('Change task title successfully');
+      await this.taskService.updateTask(new Task(this.task.id, txtArea.value, this.task.completed, this.task.priority)).then(() => {
+        this.task.text = txtArea.value;
+        this.isExpanded = false;
+        this.toaster.success('Change task title successfully');
+      }).catch(() => {
+        this.toaster.error('Something went wrong try again');
+      });
+
     }
     $event.stopPropagation();
 

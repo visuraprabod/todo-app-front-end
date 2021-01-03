@@ -76,7 +76,24 @@ export class TaskService {
     }));
   }
 
-  // async editTask(task: Task): Promise<boolean>
+  async updateTask(task: Task): Promise<void> {
+    return new Promise(((resolve, reject) => {
+      const http = new XMLHttpRequest();
+      http.onreadystatechange = () => {
+        if (http.readyState === 4) {
+          if (http.status === 204) {
+            resolve();
+          } else {
+            reject();
+          }
+        }
+      };
+
+      http.open('PUT', `http://localhost:8080/todoist/tasks?uid=${this.loginService.userId}`, true);
+      http.setRequestHeader('Content-Type', 'application/json');
+      http.send(JSON.stringify(task));
+    }));
+  }
 
 
 }
